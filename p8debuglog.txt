@@ -1,84 +1,88 @@
- gcc -g p11 final.c
- gdb a.out
-GNU gdb (Ubuntu 8.1.1-0ubuntu1) 8.1.1
-Copyright (C) 2018 Free Software Foundation, Inc.
-License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
-This is free software: you are free to change and redistribute it.
-There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
-and "show warranty" for details.
-This GDB was configured as "x86_64-linux-gnu".
-Type "show configuration" for configuration details.
-For bug reporting instructions, please see:
-<http://www.gnu.org/software/gdb/bugs/>.
-Find the GDB manual and other documentation resources online at:
-<http://www.gnu.org/software/gdb/documentation/>.
-For help, type "help".
-Type "apropos word" to search for commands related to "word"...
-Reading symbols from a.out...done.
-(gdb) b main
-Breakpoint 1 at 0x87c: file p10final.c, line 30.
-(gdb) r
-Starting program: /home/runner/pps-test1-ChinthimiSruthi-12/a.out 
-warning: Error disabling address space randomization: Operation not permitted
+Reading symbols from a.out...
+(gdb) info break
 
-Breakpoint 1, main () at p10final.c:30
-30    a = input_complex();
-(gdb) s
-input_complex () at p10final.c:10
-10  {
-(gdb) s
-12    printf("Enter complex number\n");
-(gdb) n
+Num     Type           Disp Enb Address            What
+
+1       breakpoint     keep y   0x0000000000001445 in main at main.c:52
+(gdb) run
+Starting program: /home/a.out 
+
+Breakpoint 1, main () at main.c:52
+52      {
+(gdb) step
+54        Complex c[n],result;
+(gdb) step
+55        n=get_n();
+(gdb) step
+get_n () at main.c:9
+9       {
+(gdb) next
+11        printf("Enter number of complex number to be added\n");
+(gdb) next
+Enter number of complex number to be added
+12        scanf("%d",&n);
+(gdb) next
+2
+13        return n;
+(gdb) next
+14      }
+(gdb) next
+main () at main.c:56
+56        input_n_complex(n,c);
+(gdb) step
+input_n_complex (n=32767, c=0x5555555550c0 <_start>) at main.c:23
+23      {
+(gdb) next
+25        for(i=0;i<n;i++)
+(gdb) next
+26        c[i] = input_complex();
+(gdb) next
 Enter complex number
-13    scanf("%f%f",&a.real,&a.imaginary);
-(gdb) n
 2 3
-14    return a;
-(gdb) n
-15  }
-(gdb) n
-main () at p10final.c:31
-31    b = input_complex();
-(gdb) s
-input_complex () at p10final.c:10
-10  {
-(gdb) s
-12    printf("Enter complex number\n");
-(gdb) n
+25        for(i=0;i<n;i++)
+(gdb) next
+26        c[i] = input_complex();
+(gdb) next
 Enter complex number
-13    scanf("%f%f",&a.real,&a.imaginary);
-(gdb) n
 4 5
-14    return a;
-(gdb) n
-15  }
-(gdb) n
-main () at p10final.c:32
-32    c = add(a,b);
-(gdb) s
-add (a=..., b=...) at p10final.c:19
-19    c.real = a.real + b.real;
-(gdb) n
-20    c.imaginary = a.imaginary + b.imaginary;
-(gdb) n
-21    return c;
-(gdb) n
-22  }
-(gdb) s
-main () at p10final.c:33
-33    output(a,b,c);
-(gdb) s
-output (a=..., b=..., c=...) at p10final.c:25
-25    printf(" %f + %fi + %f + %fi is %f + %fi \n",a.real,a.imaginary,b.real,b.imaginary,c.real,c.imaginary);
-(gdb) n
- 2.000000 + 3.000000i + 4.000000 + 5.000000i is 6.000000 + 8.000000i 
-26  }
-(gdb) n
-main () at p10final.c:34
-34     return 0;
-(gdb) n
-35  }
-(gdb) c
+25        for(i=0;i<n;i++)
+(gdb) next
+27      }
+(gdb) next
+main () at main.c:57
+57        result=add_n_complex(n,c);
+(gdb) step
+add_n_complex (n=2, c=0x0) at main.c:36
+36      {
+(gdb) next
+39        c1.real=0;
+(gdb) next
+40        c1.imaginary=0;
+(gdb) next
+41        for(i=0;i<=n;i++)
+(gdb) next
+42        c1 = add(c1,c[i]);
+(gdb) next
+41        for(i=0;i<=n;i++)
+(gdb) next
+42        c1 = add(c1,c[i]);
+(gdb) next
+41        for(i=0;i<=n;i++)
+(gdb) next
+42        c1 = add(c1,c[i]);
+(gdb) next
+41        for(i=0;i<=n;i++)
+(gdb) next
+43      }
+(gdb) next
+main () at main.c:58
+58        output(n,c,result);
+(gdb) next
+ 2.000000 + 3.000000i 4.000000 + 5.000000i4.000000 + 5.000000i is 6.000000 + 8.000000i 
+59        return 0;
+(gdb) next
+60      }
+(gdb) continue
 Continuing.
-[Inferior 1 (process 555) exited normally]
-(gdb) n
+[Inferior 1 (process 101) exited normally]
+(gdb) 
