@@ -1,4 +1,4 @@
- gcc -g p2original.c
+ gcc -g p2final.c
  gdb a.out
 GNU gdb (Ubuntu 8.1.1-0ubuntu1) 8.1.1
 Copyright (C) 2018 Free Software Foundation, Inc.
@@ -16,15 +16,15 @@ For help, type "help".
 Type "apropos word" to search for commands related to "word"...
 Reading symbols from a.out...done.
 (gdb) b main
-Breakpoint 1 at 0x81e: file p2original.c, line 31.
+Breakpoint 1 at 0x81e: file p2final.c, line 31.
 (gdb) r
 Starting program: /home/runner/pps-IA1-practice/a.out 
 warning: Error disabling address space randomization: Operation not permitted
 
-Breakpoint 1, main () at p2original.c:31
+Breakpoint 1, main () at p2final.c:31
 31    a=input();
 (gdb) s
-input () at p2original.c:3
+input () at p2final.c:3
 3   {
 (gdb) n
 5     printf("Enter a number\n");
@@ -36,11 +36,13 @@ Enter a number
 7     return a;
 (gdb) n
 8   }
-(gdb) n
-main () at p2original.c:32
+(gdb) p a
+$1 = 3
+(gdb) s
+main () at p2final.c:32
 32    b=input();
 (gdb) s
-input () at p2original.c:3
+input () at p2final.c:3
 3   {
 (gdb) n
 5     printf("Enter a number\n");
@@ -48,16 +50,17 @@ input () at p2original.c:3
 Enter a number
 6     scanf("%d",&a);
 (gdb) n
-
-5
+7
 7     return a;
 (gdb) n
 8   }
+(gdb) p a
+$2 = 7
 (gdb) n
-main () at p2original.c:33
+main () at p2final.c:33
 33    c=input();
 (gdb) s
-input () at p2original.c:3
+input () at p2final.c:3
 3   {
 (gdb) n
 5     printf("Enter a number\n");
@@ -65,30 +68,40 @@ input () at p2original.c:3
 Enter a number
 6     scanf("%d",&a);
 (gdb) n
-8
+4
 7     return a;
 (gdb) n
 8   }
+(gdb) p a
+$3 = 4
 (gdb) n
-main () at p2original.c:34
+main () at p2final.c:34
 34    largest=cmp(a,b,c);
 (gdb) s
-cmp (a=3, b=5, c=8) at p2original.c:11
+cmp (a=3, b=7, c=4) at p2final.c:11
 11    if(a>b&&b>c)
 (gdb) n
 15    else if(b>c)
 (gdb) n
-21      return c;
+17      return b;
 (gdb) n
 23  }
+(gdb) p b
+$4 = 7
 (gdb) n
-main () at p2original.c:35
+main () at p2final.c:35
 35    output(largest);
+(gdb) s
+output (largest=7) at p2final.c:26
+26    printf("%d is the largest number\n",largest);
 (gdb) n
-8 is the largest number
+7 is the largest number
+27  }
+(gdb) n
+main () at p2final.c:36
 36    return 0;
 (gdb) n
 37  }(gdb) c
 Continuing.
-[Inferior 1 (process 214) exited normally]
+[Inferior 1 (process 465) exited normally]
 (gdb) 
