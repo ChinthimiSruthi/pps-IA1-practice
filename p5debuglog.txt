@@ -1,4 +1,4 @@
- gcc -g p5original.c
+ gcc -g p5final.c
  gdb a.out
 GNU gdb (Ubuntu 8.1.1-0ubuntu1) 8.1.1
 Copyright (C) 2018 Free Software Foundation, Inc.
@@ -16,17 +16,17 @@ For help, type "help".
 Type "apropos word" to search for commands related to "word"...
 Reading symbols from a.out...done.
 (gdb) b main
-Breakpoint 1 at 0x876: file p5original.c, line 29.
+Breakpoint 1 at 0x876: file p5final.c, line 29.
 (gdb) r
 Starting program: /home/runner/pps-IA1-practice/a.out 
 warning: Error disabling address space randomization: Operation not permitted
 
-Breakpoint 1, main () at p5original.c:29
+Breakpoint 1, main () at p5final.c:29
 29    n=input();
 (gdb) s
-input () at p5original.c:4
+input () at p5final.c:4
 4   {
-(gdb) n
+(gdb) s
 6     printf("Enter a number\n");
 (gdb) n
 Enter a number
@@ -36,11 +36,13 @@ Enter a number
 8     return n;
 (gdb) n
 9   }
+(gdb) p n
+$1 = 4
 (gdb) n
-main () at p5original.c:30
+main () at p5final.c:30
 30    sqrt_result=my_sqrt(n);
 (gdb) s
-my_sqrt (n=4) at p5original.c:13
+my_sqrt (n=4) at p5final.c:13
 13    sqrt_result=n/2;
 (gdb) n
 14    temp=0;
@@ -56,14 +58,22 @@ my_sqrt (n=4) at p5original.c:13
 20    return sqrt_result;
 (gdb) n
 21  }
+(gdb) p sqrt_result
+$2 = 2
 (gdb) n
-main () at p5original.c:31
+main () at p5final.c:31
 31    output(n,sqrt_result);
+(gdb) s
+output (n=4, sqrt_result=2) at p5final.c:24
+24    printf("Square root of %f is %f\n",n,sqrt_result);
 (gdb) n
 Square root of 4.000000 is 2.000000
+25  }
+(gdb) n
+main () at p5final.c:32
 32    return 0;
 (gdb) n
 33  }(gdb) c
 Continuing.
-[Inferior 1 (process 673) exited normally]
+[Inferior 1 (process 1155) exited normally]
 (gdb) 
