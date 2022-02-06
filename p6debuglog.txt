@@ -1,4 +1,4 @@
- gcc -g p6original.c
+ gcc -g p6final.c
  gdb a.out
 GNU gdb (Ubuntu 8.1.1-0ubuntu1) 8.1.1
 Copyright (C) 2018 Free Software Foundation, Inc.
@@ -16,18 +16,18 @@ For help, type "help".
 Type "apropos word" to search for commands related to "word"...
 Reading symbols from a.out...done.
 (gdb) b main
-Breakpoint 1 at 0x8ad: file p6original.c, line 31.
+Breakpoint 1 at 0x8ad: file p6final.c, line 31.
 (gdb) r
 Starting program: /home/runner/pps-IA1-practice/a.out 
 warning: Error disabling address space randomization: Operation not permitted
 
-Breakpoint 1, main () at p6original.c:31
+Breakpoint 1, main () at p6final.c:31
 31  {
 (gdb) s
 33    input_two_string(a,b);
 (gdb) s
-input_two_string (a=0x7ffddaa6d330 "\agxɞ\177", b=0x7ffddaa6d3a0 "")
-    at p6original.c:4
+input_two_string (a=0x7ffd127e9160 "\aw\251\340C\177", b=0x7ffd127e91d0 "")
+    at p6final.c:4
 4     printf("Enter two strings\n");
 (gdb) n
 Enter two strings
@@ -36,25 +36,38 @@ Enter two strings
 hello
 world
 6   }
-(gdb) n
-main () at p6original.c:34
+(gdb) s
+main () at p6final.c:34
 34    int result=str_cmp(a,b);
 (gdb) s
-str_cmp (a=0x7ffddaa6d330 "hello", b=0x7ffddaa6d3a0 "world") at p6original.c:10
+str_cmp (a=0x7ffd127e9160 "hello", b=0x7ffd127e91d0 "world") at p6final.c:10
 10    for(i=0;a[i]==b[i]&&a[i]!='\0';i++);
 (gdb) n
 12      return a[i]-b[i];
 (gdb) n
 14  }
+(gdb) p a[i]-b[i]
+$1 = -15
 (gdb) n
-main () at p6original.c:35
+main () at p6final.c:35
 35    output(a,b,result);
+(gdb) s
+output (a=0x7ffd127e9160 "hello", b=0x7ffd127e91d0 "world", result=-15)
+    at p6final.c:17
+17    if (result>0)
+(gdb) n
+21    else if(result<0)
+(gdb) n
+23      printf("%s is greater than %s\n",b,a);
 (gdb) n
 world is greater than hello
+29  }
+(gdb) n
+main () at p6final.c:36
 36    return 0;
 (gdb) n
 37  }
 (gdb) c
 Continuing.
-[Inferior 1 (process 788) exited normally]
+[Inferior 1 (process 1383) exited normally]
 (gdb) 
