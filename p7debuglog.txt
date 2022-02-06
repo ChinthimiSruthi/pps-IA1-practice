@@ -1,4 +1,4 @@
- gcc -g p7original.c
+ gcc -g p7final.c
  gdb a.out
 GNU gdb (Ubuntu 8.1.1-0ubuntu1) 8.1.1
 Copyright (C) 2018 Free Software Foundation, Inc.
@@ -16,15 +16,15 @@ For help, type "help".
 Type "apropos word" to search for commands related to "word"...
 Reading symbols from a.out...done.
 (gdb) b main
-Breakpoint 1 at 0x87c: file p7original.c, line 29.
+Breakpoint 1 at 0x87c: file p7final.c, line 29.
 (gdb) r
 Starting program: /home/runner/pps-IA1-practice/a.out 
 warning: Error disabling address space randomization: Operation not permitted
 
-Breakpoint 1, main () at p7original.c:29
+Breakpoint 1, main () at p7final.c:29
 29    a = input_complex();
 (gdb) s
-input_complex () at p7original.c:9
+input_complex () at p7final.c:9
 9   {
 (gdb) n
 11    printf("Enter complex number\n");
@@ -37,11 +37,13 @@ Enter complex number
 13    return a;
 (gdb) n
 14  }
+(gdb) p a
+$1 = {real = 2, imaginary = 3}
 (gdb) n
-main () at p7original.c:30
+main () at p7final.c:30
 30    b = input_complex();
 (gdb) s
-input_complex () at p7original.c:9
+input_complex () at p7final.c:9
 9   {
 (gdb) n
 11    printf("Enter complex number\n");
@@ -49,15 +51,18 @@ input_complex () at p7original.c:9
 Enter complex number
 12    scanf("%f%f",&a.real,&a.imaginary);
 (gdb) n
-4 5
+4  
+5
 13    return a;
 (gdb) n
 14  }
+(gdb) p a
+$2 = {real = 4, imaginary = 5}
 (gdb) n
-main () at p7original.c:31
+main () at p7final.c:31
 31    c = add(a,b);
 (gdb) s
-add (a=..., b=...) at p7original.c:18
+add (a=..., b=...) at p7final.c:18
 18    c.real = a.real + b.real;
 (gdb) n
 19    c.imaginary = a.imaginary + b.imaginary;
@@ -65,14 +70,22 @@ add (a=..., b=...) at p7original.c:18
 20    return c;
 (gdb) n
 21  }
+(gdb) p c
+$3 = {real = 6, imaginary = 8}
 (gdb) n
-main () at p7original.c:32
+main () at p7final.c:32
 32    output(a,b,c);
+(gdb) s
+output (a=..., b=..., c=...) at p7final.c:24
+24    printf("%f + %fi + %f + %fi is %f + %fi\n",a.real,a.imaginary,b.real,b.imaginary,c.real,c.imaginary);
 (gdb) n
 2.000000 + 3.000000i + 4.000000 + 5.000000i is 6.000000 + 8.000000i
+25  }
+(gdb) n
+main () at p7final.c:33
 33    return 0;
 (gdb) n
 34  }(gdb) c
 Continuing.
-[Inferior 1 (process 903) exited normally]
+[Inferior 1 (process 1600) exited normally]
 (gdb) 
