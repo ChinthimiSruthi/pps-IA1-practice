@@ -1,4 +1,4 @@
- gcc -g p3original.c
+ gcc -g p3final.c
  gdb a.out
 GNU gdb (Ubuntu 8.1.1-0ubuntu1) 8.1.1
 Copyright (C) 2018 Free Software Foundation, Inc.
@@ -16,15 +16,15 @@ For help, type "help".
 Type "apropos word" to search for commands related to "word"...
 Reading symbols from a.out...done.
 (gdb) b main
-Breakpoint 1 at 0x849: file p3original.c, line 29.
+Breakpoint 1 at 0x849: file p3final.c, line 29.
 (gdb) r
 Starting program: /home/runner/pps-IA1-practice/a.out 
 warning: Error disabling address space randomization: Operation not permitted
 
-Breakpoint 1, main () at p3original.c:29
+Breakpoint 1, main () at p3final.c:29
 29    int n=input_n();
 (gdb) s
-input_n () at p3original.c:3
+input_n () at p3final.c:3
 3   {
 (gdb) n
 5     printf("Enter a number\n");
@@ -36,11 +36,13 @@ Enter a number
 7     return a;
 (gdb) n
 8   }
+(gdb) p a
+$1 = 5
 (gdb) n
-main () at p3original.c:30
+main () at p3final.c:30
 30    int sum=sum_n(n);
 (gdb) s
-sum_n (n=5) at p3original.c:11
+sum_n (n=5) at p3final.c:11
 11    int i,sum=0;
 (gdb) n
 12    for(i=1;i<=n;i++)
@@ -68,14 +70,40 @@ sum_n (n=5) at p3original.c:11
 16    return sum;
 (gdb) n
 17  }
+(gdb) p sum
+$2 = 15
 (gdb) n
-main () at p3original.c:31
+main () at p3final.c:31
 31    output(n,sum);
+(gdb) s
+output (n=5, sum=15) at p3final.c:21
+21    for(i=1;i<n;i++)
+(gdb) n
+23      printf("%d+",i);
+(gdb) n
+21    for(i=1;i<n;i++)
+(gdb) n
+23      printf("%d+",i);
+(gdb) n
+21    for(i=1;i<n;i++)
+(gdb) n
+23      printf("%d+",i);
+(gdb) n
+21    for(i=1;i<n;i++)
+(gdb) n
+23      printf("%d+",i);
+(gdb) n
+21    for(i=1;i<n;i++)
+(gdb) n
+25    printf("%d is %d\n",n,sum);
 (gdb) n
 1+2+3+4+5 is 15
+26  }
+(gdb) n
+main () at p3final.c:32
 32    return 0;
 (gdb) n
 33  }(gdb) c
 Continuing.
-[Inferior 1 (process 329) exited normally]
+[Inferior 1 (process 682) exited normally]
 (gdb) 
