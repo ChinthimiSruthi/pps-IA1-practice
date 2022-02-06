@@ -1,9 +1,4 @@
 Reading symbols from a.out...
-(gdb) info break
-
-Num     Type           Disp Enb Address            What
-
-1       breakpoint     keep y   0x0000000000001445 in main at main.c:52
 (gdb) run
 Starting program: /home/a.out 
 
@@ -26,6 +21,8 @@ Enter number of complex number to be added
 13        return n;
 (gdb) next
 14      }
+(gdb) p n
+$1 = 2
 (gdb) next
 main () at main.c:56
 56        input_n_complex(n,c);
@@ -77,12 +74,30 @@ add_n_complex (n=2, c=0x0) at main.c:36
 (gdb) next
 main () at main.c:58
 58        output(n,c,result);
+(gdb) step
+output (n=2, c=0x7ffffffd40f0, result=...) at main.c:45
+45      {
+(gdb) next
+47        for(i=0;i<n;i++)
+(gdb) next
+48        printf(" %f + %fi",c[i].real,c[i].imaginary);
+(gdb) next
+47        for(i=0;i<n;i++)
+(gdb) next
+48        printf(" %f + %fi",c[i].real,c[i].imaginary);
+(gdb) next
+47        for(i=0;i<n;i++)
+(gdb) next
+49        printf("%f + %fi is %f + %fi \n",c[n-1].real,c[n-1].imaginary,result.real,result.imaginary);
 (gdb) next
  2.000000 + 3.000000i 4.000000 + 5.000000i4.000000 + 5.000000i is 6.000000 + 8.000000i 
+50      }
+(gdb) next
+main () at main.c:59
 59        return 0;
 (gdb) next
 60      }
-(gdb) continue
+(gdb) cont
 Continuing.
-[Inferior 1 (process 101) exited normally]
+[Inferior 1 (process 499) exited normally]
 (gdb) 
