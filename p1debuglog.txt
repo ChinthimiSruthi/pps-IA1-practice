@@ -1,6 +1,6 @@
- gcc -g p1original.c
+ gcc -g p2final.c
  gdb a.out
-GNU gdb (Ubuntu 8.1.1-0ubuntu1) 8.1.1
+bGNU gdb (Ubuntu 8.1.1-0ubuntu1) 8.1.1
 Copyright (C) 2018 Free Software Foundation, Inc.
 License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 This is free software: you are free to change and redistribute it.
@@ -16,33 +16,73 @@ For help, type "help".
 Type "apropos word" to search for commands related to "word"...
 Reading symbols from a.out...done.
 (gdb) b main
-Breakpoint 1 at 0x7fc: file p1original.c, line 16.
+Breakpoint 1 at 0x810: file p2final.c, line 23.
 (gdb) r
-Starting program: /home/runner/pps-IA1-practice/a.out 
+Starting program: /home/runner/pps-test1-ChinthimiSruthi-12/a.out 
 warning: Error disabling address space randomization: Operation not permitted
 
-Breakpoint 1, main () at p1original.c:16
-16  {
+Breakpoint 1, main () at p2final.c:23
+23    a = input();
+(gdb) s
+input () at p2final.c:4
+4   {
 (gdb) n
-18    input(&a,&b);
+6     printf("Enter a number\n");
 (gdb) n
 Enter a number
-1  
+7     scanf("%d",&a);
+(gdb) n
+1
+8     return a;
+(gdb) n
+9   }
+(gdb) n
+main () at p2final.c:24
+24    b = input();
+(gdb) p a
+$1 = 1
+(gdb) s
+input () at p2final.c:4
+4   {
+(gdb) n
+6     printf("Enter a number\n");
+(gdb) n
+Enter a number
+7     scanf("%d",&a);
+(gdb) n
 2
-19    add(a,b,&sum);
+8     return a;
+(gdb) n
+9   }
+(gdb) p b
+No symbol "b" in current context.
+(gdb) n
+main () at p2final.c:25
+25    c = add(a,b);
+(gdb) p b
+$2 = 2
 (gdb) s
-add (a=1, b=2, sum=0x7ffc77bb06b4) at p1original.c:9
-9     *sum = a+b;
+add (a=1, b=2) at p2final.c:13
+13    sum = a + b;
+(gdb) n
+14    return sum;
+(gdb) n
+15  }
+(gdb) n
+main () at p2final.c:26
+26    output(a,b,c);
 (gdb) s
-10  }
+output (a=1, b=2, sum=3) at p2final.c:18
+18    printf("Sum of %d + %d is %d\n",a,b,sum);
 (gdb) n
-main () at p1original.c:20
-20    output(a,b,sum);
+Sum of 1 + 2 is 3
+19  }
 (gdb) n
-sum of 1 + 2 is 3
-21    return 0;
+main () at p2final.c:27
+27    return 0;
 (gdb) n
-22  }(gdb) c
+28  }
+(gdb) c
 Continuing.
-[Inferior 1 (process 99) exited normally]
+[Inferior 1 (process 812) exited normally]
 (gdb) 
